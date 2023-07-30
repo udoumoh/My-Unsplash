@@ -3,12 +3,12 @@ import {
   ChakraProvider,
   theme,
 } from '@chakra-ui/react';
-import WithSubnavigation from './components/Navbar'
+import AppContainer from './AppContainer';
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <WithSubnavigation />
+      <AppContainer />
     </ChakraProvider>
   );
 }

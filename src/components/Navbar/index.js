@@ -32,9 +32,6 @@ export default function WithSubnavigation() {
                 minH={'60px'}
                 py={{ base: 2 }}
                 px={{ base: 4 }}
-                borderBottom={1}
-                borderStyle={'solid'}
-                borderColor={useColorModeValue('gray.200', 'gray.900')}
                 align={'center'}>
                 <Flex
                     flex={{ base: 1, md: 'auto' }}
@@ -66,7 +63,7 @@ export default function WithSubnavigation() {
                     spacing={6}>
                     <Button
                         as={'a'}
-                        display={{ base: 'none', md: 'inline-flex' }}
+                        display={{ base: 'inline-flex', md: 'inline-flex', sm:'none' }}
                         fontSize={'sm'}
                         fontWeight={600}
                         color={'white'}
@@ -104,8 +101,12 @@ const DesktopNav = () => {
 const MobileNav = () => {
     return (
         <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
-           <Input>
-           </Input>
+            <InputGroup>
+                <InputLeftElement pointerEvents='none'>
+                    <Search2Icon color='gray.300' />
+                </InputLeftElement>
+                <Input type='text' placeholder='Search by name' />
+            </InputGroup>
         </Stack>
     )
 }
