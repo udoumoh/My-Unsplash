@@ -13,7 +13,15 @@ import img7 from '../../../images/gal7.jpg'
 
 
 const MansoryGallery = () => {
-    const images = [img1, img2, img3, img4, img5, img6, img7]
+    const images = [
+      { 'image': img1, 'label': 'random' },
+      { 'image': img2, 'label': 'random' },
+      { 'image': img3, 'label': 'random' }, 
+      { 'image': img4, 'label': 'random' },
+      { 'image': img5, 'label': 'random' },
+      { 'image': img6, 'label': 'random' },
+      { 'image': img7, 'label': 'random' }, 
+    ]
   return (
       <Box
       padding={4}
@@ -24,10 +32,10 @@ const MansoryGallery = () => {
           return(
             <Image 
             key={i}  
-            src={image}
+            src={image.image}
             display={'inline-block'}
             w='100%'
-            borderRadius={'xl'}
+            borderRadius={'3xl'}
             mb={8}
             />
           )
