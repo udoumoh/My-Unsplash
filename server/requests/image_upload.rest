@@ -2,5 +2,5 @@ POST http://localhost:3001/post
 Content-Type: application/json
 
 {
-    "imagePath": "https://cloudinary-devs.github.io/cld-docs-assets/assets/images/happy_people.jpg"
-}
+    "imagePath": "C:\\Users\\JOHN\\Desktop\\DEVCHALLENGES\\my-unsplash\\server\\gal1.jpg"
+}   

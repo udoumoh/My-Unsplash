@@ -2,8 +2,9 @@ import React from 'react'
 import {
     Box,
     Image,
+    Button,
 } from '@chakra-ui/react'
-import  img1 from '../../../images/gal1.jpg'
+import img1 from '../../../images/gal1.jpg'
 import img2 from '../../../images/gal2.jpg'
 import img3 from '../../../images/gal3.jpg'
 import img4 from '../../../images/gal4.jpg'
@@ -28,6 +29,7 @@ const MansoryGallery = () => {
       width={'100%'}
       sx={{ columnCount:[1,2,3], columnGap:'32px'}}
       >
+        <Button>Delete</Button>
         {images.map((image, i) => {
           return(
             <Image 

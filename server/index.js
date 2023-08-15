@@ -31,8 +31,15 @@ app.post('/post', async(req, res) => {
         try {
             // Upload the image
             const result = await cloudinary.uploader.upload(body.imagePath, options);
-            console.log(result);
-            res.send(result.public_id);
+            const assets = await cloudinary.api.resources({ type: 'upload' })
+            const parsedAssets = assets.resources.map((asset) => {
+                return {
+                    "public_id": asset.public_id, 
+                    "url": asset.secure_url,
+                }
+            })
+            console.log(parsedAssets)
+            res.send(result.secure_url);
         } catch (error) {
             console.error(error);
         }
