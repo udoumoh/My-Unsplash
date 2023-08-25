@@ -4,7 +4,7 @@ import {
 } from '@chakra-ui/react';
 import WithSubnavigation from '../components/Navbar'
 import '../styles.css'
-import MansoryGallery from '../components/Navbar/MansoryGallery';
+import MansoryGallery from '../components/MansoryGallery'
 
 const AppContainer = () => {
   return (
