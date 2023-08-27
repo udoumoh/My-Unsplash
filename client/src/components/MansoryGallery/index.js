@@ -3,6 +3,7 @@ import {
   Box,
   Image,
   Button,
+  Grid,
 } from '@chakra-ui/react';
 import img1 from '../../images/gal1.jpg';
 import img2 from '../../images/gal2.jpg';
@@ -66,12 +67,14 @@ const MansoryGallery = () => {
                   backgroundColor="rgba(0, 0, 0, 0.5)"
                   borderRadius="3xl"
                 >
-                  <Button variant="solid" colorScheme="teal" marginRight={2}>
-                    Button
+                  <Grid alignContent={'space-between'} m={6} width={'100%'}>
+                    <Button variant="outline" colorScheme="red" marginRight={2} borderRadius={24} px={8} justifySelf={'end'} _hover={{ bg: '#c23616', color: '#fff', border:'#c23616'}}>
+                    delete
                   </Button>
-                  <Box color="white" fontSize="sm">
+                  <Box color="white" fontSize="xl" fontWeight={'bold'}>
                     {image.label}
                   </Box>
+                  </Grid>
                 </Box>
               )}
             </Box>

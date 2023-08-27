@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     Box,
     Flex,
@@ -13,6 +13,14 @@ import {
     useDisclosure,
     InputGroup,
     InputLeftElement,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    Text,
+    Grid,
 } from '@chakra-ui/react'
 import {
     HamburgerIcon,
@@ -22,8 +30,16 @@ import {
 import Logo from '../../logo.svg'
 
 export default function WithSubnavigation() {
-    const { isOpen, onToggle } = useDisclosure()
+    const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
+    const [imageData, setImageData] = useState({label: "", imageUrl: ""})
 
+    const handleLabelChange = (event) => {
+        setImageData({...imageData, label:event.target.value, imageUrl:""})
+    }
+
+    const handleImageChange = (event) => {
+        setImageData({ ...imageData, label: "", imageUrl: event.target.value })
+    }
     return (
         <Box>
             <Flex
@@ -62,19 +78,53 @@ export default function WithSubnavigation() {
                     direction={'row'}
                     spacing={6}>
                     <Button
-                        as={'a'}
+                        onClick={onOpen}
                         display={{ base: 'inline-flex', md: 'inline-flex', sm:'none' }}
                         fontSize={'sm'}
                         fontWeight={600}
                         color={'white'}
                         bg={'green.400'}
-                        href={'#'}
                         _hover={{
                             bg: 'green.300',
                         }}>
                         Add a photo
                     </Button>
                 </Stack>
+
+                <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader fontSize={'xl'}>Add a new photo</ModalHeader>
+                        <ModalBody>
+                            <Box>
+                                <Grid mb={4}>
+                                    <Text>Label</Text>
+                                    <Input 
+                                    focusBorderColor='green'
+                                    Placeholder = "Enter a label"
+                                    onChange={handleLabelChange}
+                                    />
+                                </Grid>
+                                <Grid my={4}>
+                                    <Text>Photo URL</Text>
+                                    <Input
+                                    focusBorderColor='green'
+                                    Placeholder="Enter Image Url"
+                                    onChange={handleImageChange}
+                                    />
+                                </Grid>
+                            </Box>
+                        </ModalBody>
+
+                        <ModalFooter>
+                            <Button variant="ghost" mr={3} onClick={onClose}>
+                                Cancel
+                            </Button>
+                            <Button colorScheme='green' >Submit</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
+
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
