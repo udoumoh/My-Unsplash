@@ -29,16 +29,21 @@ import {
 } from '@chakra-ui/icons'
 import Logo from '../../logo.svg'
 
-export default function WithSubnavigation() {
+export default function WithSubnavigation({handleDataPass}) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
     const [imageData, setImageData] = useState({label: "", imageUrl: ""})
 
     const handleLabelChange = (event) => {
-        setImageData({...imageData, label:event.target.value, imageUrl:""})
+        setImageData({...imageData, label:event.target.value, imageUrl:imageData.imageUrl})
     }
 
     const handleImageChange = (event) => {
-        setImageData({ ...imageData, label: "", imageUrl: event.target.value })
+        setImageData({ ...imageData, label: imageData.label, imageUrl: event.target.value })
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        handleDataPass(imageData)
     }
     return (
         <Box>
@@ -101,7 +106,7 @@ export default function WithSubnavigation() {
                                     <Text>Label</Text>
                                     <Input 
                                     focusBorderColor='green'
-                                    Placeholder = "Enter a label"
+                                    placeholder = "Enter a label"
                                     onChange={handleLabelChange}
                                     />
                                 </Grid>
@@ -109,7 +114,7 @@ export default function WithSubnavigation() {
                                     <Text>Photo URL</Text>
                                     <Input
                                     focusBorderColor='green'
-                                    Placeholder="Enter Image Url"
+                                    placeholder="Enter Image Url"
                                     onChange={handleImageChange}
                                     />
                                 </Grid>
@@ -120,7 +125,7 @@ export default function WithSubnavigation() {
                             <Button variant="ghost" mr={3} onClick={onClose}>
                                 Cancel
                             </Button>
-                            <Button colorScheme='green' >Submit</Button>
+                            <Button colorScheme='green' onClick={handleSubmit}>Submit</Button>
                         </ModalFooter>
                     </ModalContent>
                 </Modal>

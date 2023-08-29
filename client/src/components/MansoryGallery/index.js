@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Image,
@@ -13,9 +13,15 @@ import img5 from '../../images/gal5.jpg';
 import img6 from '../../images/gal6.jpg';
 import img7 from '../../images/gal7.jpg';
 
-const MansoryGallery = () => {
+const MansoryGallery = ({finalImageData}) => {
+  const [imageData, setImageData] = useState([])
+
+  const handleNewData = () => {
+    setImageData([...imageData, finalImageData])
+  }
+
   const images = [
-    { image: img1, label: 'random' },
+    { image: img1, label: 'The quick brown fox' },
     { image: img2, label: 'random' },
     { image: img3, label: 'random' },
     { image: img4, label: 'random' },
@@ -23,6 +29,11 @@ const MansoryGallery = () => {
     { image: img6, label: 'random' },
     { image: img7, label: 'random' },
   ];
+  
+  useEffect(() => {
+      handleNewData();
+  }, [finalImageData]);
+  console.log(imageData);
 
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 

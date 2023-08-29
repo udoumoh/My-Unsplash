@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     Box
 } from '@chakra-ui/react';
@@ -7,10 +7,16 @@ import '../styles.css'
 import MansoryGallery from '../components/MansoryGallery'
 
 const AppContainer = () => {
+    const[imageData, setImageData] = useState([])
+
+    const fetchImageData = (data) => {
+        setImageData({image: data.imageUrl, label: data.label})
+    }
+    // console.log(imageData)
   return (
       <Box className='custom-container'>
-          <WithSubnavigation />
-          <MansoryGallery />
+          <WithSubnavigation handleDataPass={fetchImageData} />
+          <MansoryGallery finalImageData={imageData}/>
       </Box>
   )
 }
