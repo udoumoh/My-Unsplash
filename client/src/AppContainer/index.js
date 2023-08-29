@@ -7,16 +7,20 @@ import '../styles.css'
 import MansoryGallery from '../components/MansoryGallery'
 
 const AppContainer = () => {
-    const[imageData, setImageData] = useState([])
+    const [imageData, setImageData] = useState([])
+    const [searchValue, setSearchValue] = useState('')
 
     const fetchImageData = (data) => {
-        setImageData({image: data.imageUrl, label: data.label})
+        setImageData({imageLink: data.imageUrl, label: data.label})
     }
-    // console.log(imageData)
+
+    const fetchSeachValue = (searchPrompt) => {
+        setSearchValue(searchPrompt)
+    }
   return (
       <Box className='custom-container'>
-          <WithSubnavigation handleDataPass={fetchImageData} />
-          <MansoryGallery finalImageData={imageData}/>
+          <WithSubnavigation handleImageDataPass={fetchImageData} handleSearchDataPass={fetchSeachValue}/>
+          <MansoryGallery finalImageData={imageData} searchPrompt={searchValue}/>
       </Box>
   )
 }

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     Box,
     Flex,
@@ -28,10 +28,12 @@ import {
     Search2Icon,
 } from '@chakra-ui/icons'
 import Logo from '../../logo.svg'
+import swal from 'sweetalert'
 
-export default function WithSubnavigation({handleDataPass}) {
+export default function WithSubnavigation({handleImageDataPass, handleSearchDataPass}) {
     const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
     const [imageData, setImageData] = useState({label: "", imageUrl: ""})
+    const [searchValue, setSearchValue] = useState("")
 
     const handleLabelChange = (event) => {
         setImageData({...imageData, label:event.target.value, imageUrl:imageData.imageUrl})
@@ -41,10 +43,25 @@ export default function WithSubnavigation({handleDataPass}) {
         setImageData({ ...imageData, label: imageData.label, imageUrl: event.target.value })
     }
 
+    const updateSearchValue = (e) => {
+        setSearchValue(e.target.value)
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        handleDataPass(imageData)
+        handleImageDataPass(imageData)
+        onClose()
+        swal({
+            title: "Success",
+            text: "Image added successfully",
+            icon: "success"
+        }).then();
     }
+
+    useEffect(() => {
+        handleSearchDataPass(searchValue)
+    }, [searchValue])
+
     return (
         <Box>
             <Flex
@@ -73,7 +90,7 @@ export default function WithSubnavigation({handleDataPass}) {
                     </Image>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
-                        <DesktopNav />
+                        <DesktopNav updateSearchValue={updateSearchValue}/>
                     </Flex>
                 </Flex>
 
@@ -133,13 +150,13 @@ export default function WithSubnavigation({handleDataPass}) {
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
-                <MobileNav />
+                <MobileNav updateSearchValue={updateSearchValue}/>
             </Collapse>
         </Box>
     )
 }
 
-const DesktopNav = () => {
+const DesktopNav = ({updateSearchValue}) => {
 
     return (
         <Stack direction={'row'} spacing={4}>
@@ -147,20 +164,20 @@ const DesktopNav = () => {
                 <InputLeftElement pointerEvents='none'>
                     <Search2Icon color='gray.300' />
                 </InputLeftElement>
-                <Input type='text' placeholder='Search by name' />
+                <Input type='text' placeholder='Search by name' onChange={updateSearchValue}/>
             </InputGroup>
         </Stack>
     )
 }
 
-const MobileNav = () => {
+const MobileNav = ({updateSearchValue}) => {
     return (
         <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
             <InputGroup>
                 <InputLeftElement pointerEvents='none'>
                     <Search2Icon color='gray.300' />
                 </InputLeftElement>
-                <Input type='text' placeholder='Search by name' />
+                <Input type='text' placeholder='Search by name' onChange={updateSearchValue}/>
             </InputGroup>
         </Stack>
     )

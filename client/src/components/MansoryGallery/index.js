@@ -13,27 +13,29 @@ import img5 from '../../images/gal5.jpg';
 import img6 from '../../images/gal6.jpg';
 import img7 from '../../images/gal7.jpg';
 
-const MansoryGallery = ({finalImageData}) => {
-  const [imageData, setImageData] = useState([])
+const MansoryGallery = ({finalImageData, searchPrompt}) => {
+  const [imageData, setImageData] = useState([
+    { imageLink: img1, label: 'The quick brown fox' },
+    { imageLink: img2, label: 'random' },
+    { imageLink: img3, label: 'random' },
+    { imageLink: img4, label: 'random' },
+    { imageLink: img5, label: 'random' },
+    { imageLink: img6, label: 'random' },
+    { imageLink: img7, label: 'random' },])
 
   const handleNewData = () => {
     setImageData([...imageData, finalImageData])
   }
-
-  const images = [
-    { image: img1, label: 'The quick brown fox' },
-    { image: img2, label: 'random' },
-    { image: img3, label: 'random' },
-    { image: img4, label: 'random' },
-    { image: img5, label: 'random' },
-    { image: img6, label: 'random' },
-    { image: img7, label: 'random' },
-  ];
   
+  const handleDelete = (data) => {
+    let newImageData = imageData.filter((image) => image.imageLink !== data.imageLink)
+    setImageData(newImageData)
+  }
   useEffect(() => {
+    if(finalImageData.imageLink && finalImageData.label){
       handleNewData();
+    }
   }, [finalImageData]);
-  console.log(imageData);
 
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
@@ -46,7 +48,7 @@ const MansoryGallery = ({finalImageData}) => {
         sx={{ columnCount: [1,2,3], columnGap: '32px' }}
         position={'relative'}
       >
-        {images.map((image, i) => {
+        {imageData.map((image, i) => {
           return (
             <Box
               key={i}
@@ -60,7 +62,7 @@ const MansoryGallery = ({finalImageData}) => {
             >
               <Image
                 key={i}
-                src={image.image}
+                src={image.imageLink}
                 display={'inline-block'}
                 width="100%"
                 height="100%"
@@ -79,7 +81,16 @@ const MansoryGallery = ({finalImageData}) => {
                   borderRadius="3xl"
                 >
                   <Grid alignContent={'space-between'} m={6} width={'100%'}>
-                    <Button variant="outline" colorScheme="red" marginRight={2} borderRadius={24} px={8} justifySelf={'end'} _hover={{ bg: '#c23616', color: '#fff', border:'#c23616'}}>
+                    <Button 
+                    variant="outline" 
+                    colorScheme="red" 
+                    marginRight={2} 
+                    borderRadius={24} 
+                    px={8} 
+                    justifySelf={'end'} 
+                    _hover={{ bg: '#c23616', color: '#fff', border:'#c23616'}}
+                    onClick={()=>{handleDelete(image)}}
+                    >
                     delete
                   </Button>
                   <Box color="white" fontSize="xl" fontWeight={'bold'}>
