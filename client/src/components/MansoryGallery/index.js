@@ -23,19 +23,31 @@ const MansoryGallery = ({finalImageData, searchPrompt}) => {
     { imageLink: img6, label: 'random' },
     { imageLink: img7, label: 'random' },])
 
+  const [filteredData, setFilteredData] = useState(imageData)
+
+  const handleDataSearch = () => {
+    let newData = imageData.filter((image) => image.label.toLowerCase().includes(searchPrompt.toLowerCase()))
+    setFilteredData(newData)
+  }
+
   const handleNewData = () => {
-    setImageData([...imageData, finalImageData])
+    setFilteredData([...filteredData, finalImageData])
   }
   
   const handleDelete = (data) => {
-    let newImageData = imageData.filter((image) => image.imageLink !== data.imageLink)
-    setImageData(newImageData)
+    setImageData(imageData.filter((image) => image.imageLink !== data.imageLink))
+    let newImageData = filteredData.filter((image) => image.imageLink !== data.imageLink)
+    setFilteredData(newImageData)
   }
   useEffect(() => {
     if(finalImageData.imageLink && finalImageData.label){
       handleNewData();
     }
   }, [finalImageData]);
+
+  useEffect(() => {
+    handleDataSearch( )
+  }, [searchPrompt]);
 
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
@@ -48,7 +60,7 @@ const MansoryGallery = ({finalImageData, searchPrompt}) => {
         sx={{ columnCount: [1,2,3], columnGap: '32px' }}
         position={'relative'}
       >
-        {imageData.map((image, i) => {
+        {filteredData.map((image, i) => {
           return (
             <Box
               key={i}

@@ -5,6 +5,7 @@ import {
 import WithSubnavigation from '../components/Navbar'
 import '../styles.css'
 import MansoryGallery from '../components/MansoryGallery'
+import Footer from '../components/Footer';
 
 const AppContainer = () => {
     const [imageData, setImageData] = useState([])
@@ -21,6 +22,7 @@ const AppContainer = () => {
       <Box className='custom-container'>
           <WithSubnavigation handleImageDataPass={fetchImageData} handleSearchDataPass={fetchSeachValue}/>
           <MansoryGallery finalImageData={imageData} searchPrompt={searchValue}/>
+          <Footer />
       </Box>
   )
 }

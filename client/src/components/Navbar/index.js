@@ -10,7 +10,8 @@ import {
     Input,
     useColorModeValue,
     useBreakpointValue,
-    useDisclosure,
+    useDisclosure as useNavDisclosure,
+    useDisclosure as useModalDisclosure,
     InputGroup,
     InputLeftElement,
     Modal,
@@ -31,7 +32,8 @@ import Logo from '../../logo.svg'
 import swal from 'sweetalert'
 
 export default function WithSubnavigation({handleImageDataPass, handleSearchDataPass}) {
-    const { isOpen, onOpen, onClose, onToggle } = useDisclosure()
+    const { isOpen: isNavOpen, onToggle: onNavToggle } = useNavDisclosure()
+    const { isOpen: isModalOpen, onOpen: onModalOpen, onClose: onModalClose } = useModalDisclosure()
     const [imageData, setImageData] = useState({label: "", imageUrl: ""})
     const [searchValue, setSearchValue] = useState("")
 
@@ -50,7 +52,7 @@ export default function WithSubnavigation({handleImageDataPass, handleSearchData
     const handleSubmit = (e) => {
         e.preventDefault()
         handleImageDataPass(imageData)
-        onClose()
+        onModalClose()
         swal({
             title: "Success",
             text: "Image added successfully",
@@ -76,8 +78,8 @@ export default function WithSubnavigation({handleImageDataPass, handleSearchData
                     ml={{ base: -2 }}
                     display={{ base: 'flex', md: 'none' }}>
                     <IconButton
-                        onClick={onToggle}
-                        icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
+                        onClick={onNavToggle}
+                        icon={isNavOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
                         variant={'ghost'}
                         aria-label={'Toggle Navigation'}
                     />
@@ -100,8 +102,8 @@ export default function WithSubnavigation({handleImageDataPass, handleSearchData
                     direction={'row'}
                     spacing={6}>
                     <Button
-                        onClick={onOpen}
-                        display={{ base: 'inline-flex', md: 'inline-flex', sm:'none' }}
+                        onClick={onModalOpen}
+                        hideBelow={'md'}
                         fontSize={'sm'}
                         fontWeight={600}
                         color={'white'}
@@ -113,7 +115,7 @@ export default function WithSubnavigation({handleImageDataPass, handleSearchData
                     </Button>
                 </Stack>
 
-                <Modal isOpen={isOpen} onClose={onClose} size={'xl'}>
+                <Modal isOpen={isModalOpen} onClose={onModalClose} size={'xl'}>
                     <ModalOverlay />
                     <ModalContent>
                         <ModalHeader fontSize={'xl'}>Add a new photo</ModalHeader>
@@ -139,7 +141,7 @@ export default function WithSubnavigation({handleImageDataPass, handleSearchData
                         </ModalBody>
 
                         <ModalFooter>
-                            <Button variant="ghost" mr={3} onClick={onClose}>
+                            <Button variant="ghost" mr={3} onClick={onModalClose}>
                                 Cancel
                             </Button>
                             <Button colorScheme='green' onClick={handleSubmit}>Submit</Button>
@@ -149,8 +151,8 @@ export default function WithSubnavigation({handleImageDataPass, handleSearchData
 
             </Flex>
 
-            <Collapse in={isOpen} animateOpacity>
-                <MobileNav updateSearchValue={updateSearchValue}/>
+            <Collapse in={isNavOpen} animateOpacity>
+                <MobileNav updateSearchValue={updateSearchValue} onModalOpen={onModalOpen}/>
             </Collapse>
         </Box>
     )
@@ -170,7 +172,7 @@ const DesktopNav = ({updateSearchValue}) => {
     )
 }
 
-const MobileNav = ({updateSearchValue}) => {
+const MobileNav = ({updateSearchValue, onModalOpen}) => {
     return (
         <Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
             <InputGroup>
@@ -179,6 +181,19 @@ const MobileNav = ({updateSearchValue}) => {
                 </InputLeftElement>
                 <Input type='text' placeholder='Search by name' onChange={updateSearchValue}/>
             </InputGroup>
+            <Button
+                mt={3}
+                onClick={onModalOpen}
+                display={{ base: 'inline-flex', md: 'inline-flex', sm: 'none' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'green.400'}
+                _hover={{
+                    bg: 'green.300',
+                }}>
+                Add a photo
+            </Button>
         </Stack>
     )
 }
