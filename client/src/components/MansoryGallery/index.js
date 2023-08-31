@@ -16,12 +16,13 @@ import img7 from '../../images/gal7.jpg';
 const MansoryGallery = ({finalImageData, searchPrompt}) => {
   const [imageData, setImageData] = useState([
     { imageLink: img1, label: 'The quick brown fox' },
-    { imageLink: img2, label: 'random' },
-    { imageLink: img3, label: 'random' },
-    { imageLink: img4, label: 'random' },
-    { imageLink: img5, label: 'random' },
-    { imageLink: img6, label: 'random' },
-    { imageLink: img7, label: 'random' },])
+    // { imageLink: img2, label: 'random' },
+    // { imageLink: img3, label: 'random' },
+    // { imageLink: img4, label: 'random' },
+    // { imageLink: img5, label: 'random' },
+    // { imageLink: img6, label: 'random' },
+    // { imageLink: img7, label: 'random' },
+  ])
 
   const [filteredData, setFilteredData] = useState(imageData)
 
