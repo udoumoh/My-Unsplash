@@ -5,23 +5,14 @@ import {
   Button,
   Grid,
 } from '@chakra-ui/react';
-import img1 from '../../images/gal1.jpg';
-import img2 from '../../images/gal2.jpg';
-import img3 from '../../images/gal3.jpg';
-import img4 from '../../images/gal4.jpg';
-import img5 from '../../images/gal5.jpg';
-import img6 from '../../images/gal6.jpg';
-import img7 from '../../images/gal7.jpg';
 
 const MansoryGallery = ({finalImageData, searchPrompt}) => {
   const [imageData, setImageData] = useState([
-    { imageLink: img1, label: 'The quick brown fox' },
-    // { imageLink: img2, label: 'random' },
-    // { imageLink: img3, label: 'random' },
-    // { imageLink: img4, label: 'random' },
-    // { imageLink: img5, label: 'random' },
-    // { imageLink: img6, label: 'random' },
-    // { imageLink: img7, label: 'random' },
+    { imageLink: 'https://th.bing.com/th/id/OIP.YxzI-y8ycOFwUfiUC4B0tAHaLH?pid=ImgDet&rs=1', label: 'The quick brown fox' },
+    { imageLink: 'https://th.bing.com/th/id/OIP.eYWPIwo-TTvCJdALoFAhNAHaHa?pid=ImgDet&rs=1', label: 'random' },
+    { imageLink: 'https://th.bing.com/th/id/R.50ec7bef4e36fd6fba204f3970f950ad?rik=4VslbDpyxrMZdQ&pid=ImgRaw&r=0', label: 'random' },
+    { imageLink: 'https://th.bing.com/th/id/R.d58339de61b5d07fd4db988f8e8a7cdd?rik=1%2fUoNcqqIfTiXw&riu=http%3a%2f%2fthewowstyle.com%2fwp-content%2fuploads%2f2015%2f01%2fnature-images..jpg&ehk=%2fG27fwqbQI%2fi%2bxgGclM1BHuObngpvsp27tc36F59T9c%3d&risl=&pid=ImgRaw&r=0', label: 'random' },
+    { imageLink: 'https://th.bing.com/th/id/R.2c2d80ebf7b7f10b849996610480e8c2?rik=nfxRfL7iVnEzfQ&riu=http%3a%2f%2fwallpapersdsc.net%2fwp-content%2fuploads%2f2017%2f05%2fBeautiful-girls-Desktop-Wallpaper-.jpg&ehk=pvr8BGdhUe4QttMfOqmD1%2bGBOFcXeo9ffQnSMZVwNNw%3d&risl=&pid=ImgRaw&r=0', label: 'Another random image'}
   ])
 
   const [filteredData, setFilteredData] = useState(imageData)
@@ -57,7 +48,6 @@ const MansoryGallery = ({finalImageData, searchPrompt}) => {
       <Box
         padding={4}
         mt={10}
-        width={'100%'}
         sx={{ columnCount: [1,2,3], columnGap: '32px' }}
         position={'relative'}
       >

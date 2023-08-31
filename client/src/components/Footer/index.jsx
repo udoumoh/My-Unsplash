@@ -3,11 +3,12 @@ import {
     Text,
     Box,
     Center,
+    Flex,
 } from "@chakra-ui/react"
 
 const Footer = () => {
     return (
-        <footer>
+        <Flex align="flex-end" justify="flex-end" w="100%" h="100vh">
             <Box
             width={"100%"}
             alignItems={'center'}
@@ -17,13 +18,13 @@ const Footer = () => {
             <Text
             color={'gray.400'}
             fontSize={20}
-            fontWeight={'bold'}
+            fontWeight={'400'}
             >
-                Created by <Text display={'inline'} color={'gray.500'} fontWeight={'bold'}> Udoumoh </Text> - <Text color={'blue.500'} as={'a'} fontWeight={'bold'} href='https://devchallenges.io/'>devChallenges.io</Text>
+                Created by <Text display={'inline'} color={'gray.500'} fontWeight={'400'}> Udoumoh </Text> - <Text color={'blue.500'} as={'a'} fontWeight={'400'} href='https://devchallenges.io/'>devChallenges.io</Text>
             </Text>
             </Center>
             </Box>
-        </footer>
+        </Flex>
     )
 }
 
