@@ -23,6 +23,7 @@ const MansoryGallery = ({finalImageData, searchPrompt}) => {
   }
 
   const handleNewData = () => {
+    setImageData([...imageData, finalImageData])
     setFilteredData([...filteredData, finalImageData])
   }
   
