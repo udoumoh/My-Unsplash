@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
     return (
-        <Flex align="flex-end" justify="flex-end" w="100%" h="100vh">
+        <Flex align="flex-end" justify="flex-end" w="100%">
             <Box
             width={"100%"}
             alignItems={'center'}
